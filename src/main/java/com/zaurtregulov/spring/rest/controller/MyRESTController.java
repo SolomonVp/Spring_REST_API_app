@@ -26,11 +26,15 @@ public class MyRESTController {
     @GetMapping("/employees/{id}")
     public Employee getEmployee(@PathVariable int id) {
         Employee employee = employeeService.getEmployee(id);
-
         if (employee==null) {
             throw new NoSuchEmployeeException("There is now employee with ID = " + id + " int Database");
         }
+        return employee;
+    }
 
+    @PostMapping("/employees")
+    public Employee addNewEmployee(@RequestBody Employee employee) {
+        employeeService.saveEmployee(employee);
         return employee;
     }
 
